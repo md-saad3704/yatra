@@ -4,11 +4,11 @@ import { ArrowRight, MapPinned } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-import tajMahal from "../../assets/images/taj-mahal.jpg";
-import kerala from "../../assets/images/kerala.jpg";
-import ladakh from "../../assets/images/ladakh.jpg";
-import goa from "../../assets/images/goa.jpg";
-import rajasthan from "../../assets/images/rajasthan.jpg";
+import tajMahal from "../../assets/images/taj-mahal.png";
+import kerala from "../../assets/images/kerala.png";
+import ladakh from "../../assets/images/ladakh.png";
+import goa from "../../assets/images/goa.png";
+import rajasthan from "../../assets/images/rajasthan.png";
 
 
 function HeroSection() {
