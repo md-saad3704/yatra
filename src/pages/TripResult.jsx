@@ -9,6 +9,8 @@ import {
   BookmarkPlus,
 } from "lucide-react";
 import { saveTrip } from "../services/storage";
+import { Download } from "lucide-react";
+import { exportTripPDF } from "../services/pdfGenerator";
 
 function TripResult() {
   const location = useLocation();
@@ -40,7 +42,7 @@ function TripResult() {
         </div>
 
         {/* Save Trip */}
-        <div className="mb-8 flex justify-center">
+        <div className="mb-8 flex justify-center gap-4">
           <button
             onClick={() => {
               saveTrip(tripPlan);
@@ -50,6 +52,14 @@ function TripResult() {
           >
             <BookmarkPlus size={18} />
             Save Trip
+          </button>
+          {/* Download */}
+          <button
+            onClick={() => exportTripPDF(tripPlan)}
+            className="flex items-center gap-2 rounded-xl border border-[#FF6B35] px-6 py-3 font-medium text-[#FF6B35] transition hover:bg-orange-50"
+          >
+            <Download size={18} />
+            Export PDF
           </button>
         </div>
 
