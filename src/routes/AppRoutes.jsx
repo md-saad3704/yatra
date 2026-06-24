@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
         element: <TripPlanner />,
       },
       {
-        path: "trip/:slug",
+        path: "trip/result",
         element: <TripResult />,
       },
       {

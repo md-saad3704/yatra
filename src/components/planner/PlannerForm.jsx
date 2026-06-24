@@ -1,6 +1,8 @@
 import { plannerDestinations } from "../../data/plannerDestinations";
 import TripDetailsForm from "./TripDetailsForm";
 import InterestSelector from "./InterestSelector";
+import { useNavigate } from "react-router-dom";
+import { generateTripPlan } from "../../services/plannerEngine";
 
 import BudgetSlider from "./BudgetSlider";
 
@@ -10,6 +12,7 @@ function PlannerForm({
     tripData,
     setTripData,
 }) {
+    const navigate = useNavigate();
 
     if (currentStep === 2) {
         return (
@@ -19,11 +22,13 @@ function PlannerForm({
                 </h2>
 
                 <p className="mb-8 text-gray-600">
-                    <BudgetSlider
-                        tripData={tripData}
-                        setTripData={setTripData}
-                    />
+                    Choose a budget range for your trip.
                 </p>
+
+                <BudgetSlider
+                    tripData={tripData}
+                    setTripData={setTripData}
+                />
 
                 <div className="flex justify-between">
                     <button
@@ -191,6 +196,17 @@ function PlannerForm({
                     </button>
 
                     <button
+                        onClick={() => {
+                            const tripPlan = generateTripPlan(tripData);
+
+                            console.log("Generated Trip:", tripPlan);
+
+                            navigate("/trip/result", {
+                                state: {
+                                    tripPlan,
+                                },
+                            });
+                        }}
                         className="rounded-xl bg-[#FF6B35] px-8 py-3 font-medium text-white"
                     >
                         Generate Trip
