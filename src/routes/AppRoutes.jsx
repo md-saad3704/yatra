@@ -10,6 +10,7 @@ import TripResult from "../pages/TripResult";
 import Analytics from "../pages/Analytics";
 import MyTrips from "../pages/MyTrips";
 import NotFound from "../pages/NotFound";
+import SavedTripDetails from "../pages/SavedTripDetails";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: "my-trips",
         element: <MyTrips />,
+      },
+      {
+        path: "saved-trip",
+        element: <SavedTripDetails />,
       },
     ],
   },
