@@ -1,16 +1,27 @@
 import {
   BarChart,
   Bar,
+  PieChart,
+  Pie,
+  Cell,
   XAxis,
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 
 import { getAnalytics } from "../services/analytics";
 
 function Analytics() {
   const analytics = getAnalytics();
+  const COLORS = [
+  "#FF6B35",
+  "#4ECDC4",
+  "#45B7D1",
+  "#96CEB4",
+  "#FFBE0B",
+];
 
   return (
     <div className="min-h-screen bg-[#FAFAF8]">
@@ -72,31 +83,113 @@ function Analytics() {
         </div>
 
         {/* Chart */}
-        <div className="rounded-3xl bg-white p-8 shadow-lg">
-          <h2 className="mb-6 text-3xl font-bold">
-            Destination Popularity
-          </h2>
+        <div className="grid gap-8 lg:grid-cols-2">
 
-          <div className="h-[400px]">
-            <ResponsiveContainer
-              width="100%"
-              height="100%"
-            >
-              <BarChart
-                data={analytics.destinationData}
-              >
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar
-                  dataKey="trips"
-                  fill="#FF6B35"
-                  radius={[8, 8, 0, 0]}
-                />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+  {/* Destination Chart */}
+  <div className="rounded-3xl bg-white p-8 shadow-lg">
+    <h2 className="mb-6 text-2xl font-bold">
+      Destination Popularity
+    </h2>
+
+    <div className="h-80">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={analytics.destinationData}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Bar
+            dataKey="trips"
+            fill="#FF6B35"
+            radius={[8, 8, 0, 0]}
+          />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  </div>
+
+  {/* Travel Style Pie */}
+  <div className="rounded-3xl bg-white p-8 shadow-lg">
+    <h2 className="mb-6 text-2xl font-bold">
+      Travel Style Breakdown
+    </h2>
+
+    <div className="h-80">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={analytics.travelStyleData}
+            dataKey="value"
+            nameKey="name"
+            outerRadius={110}
+            label
+          >
+            {analytics.travelStyleData.map((entry, index) => (
+              <Cell
+                key={entry.name}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
+
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  </div>
+
+</div>
+
+<div className="mt-8 grid gap-8 lg:grid-cols-2">
+
+  {/* Budget Chart */}
+  <div className="rounded-3xl bg-white p-8 shadow-lg">
+    <h2 className="mb-6 text-2xl font-bold">
+      Budget Distribution
+    </h2>
+
+    <div className="h-80">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={analytics.budgetData}>
+          <XAxis dataKey="range" />
+          <YAxis />
+          <Tooltip />
+          <Bar
+            dataKey="trips"
+            fill="#4ECDC4"
+            radius={[8, 8, 0, 0]}
+          />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  </div>
+
+  {/* Interests */}
+  <div className="rounded-3xl bg-white p-8 shadow-lg">
+    <h2 className="mb-6 text-2xl font-bold">
+      Top Interests
+    </h2>
+
+    <div className="space-y-4">
+      {analytics.topInterests.map(([interest, count]) => (
+        <div
+          key={interest}
+          className="flex items-center justify-between rounded-xl bg-orange-50 px-5 py-4"
+        >
+          <span className="font-medium">
+            {interest}
+          </span>
+
+          <span className="rounded-full bg-[#FF6B35] px-3 py-1 text-sm font-semibold text-white">
+            {count}
+          </span>
         </div>
+      ))}
+    </div>
+  </div>
+
+</div>
+
 
       </div>
     </div>
