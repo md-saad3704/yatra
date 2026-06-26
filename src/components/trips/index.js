@@ -11,3 +11,11 @@ export { default as TripActions } from "./TripActions";
 export { default as TripSummary } from "./TripSummary";
 export { default as BudgetBreakdown } from "./BudgetBreakdown";
 export { default as ItinerarySection } from "./ItinerarySection";
+
+
+export { default as MyTripsHeader } from "./MyTripsHeader";
+export { default as SavedTripCard } from "./SavedTripCard";
+export { default as EmptyTrips } from "./EmptyTrips";
+
+export { default as TripFilters } from "./TripFilters";
+export { default as FilterSummary } from "./FilterSummary";
