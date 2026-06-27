@@ -11,10 +11,7 @@
 =========================================================== */
 
 import { useEffect, useState } from "react";
-
-/* ===========================================================
-   Third Party Imports
-=========================================================== */
+import { showSuccess } from "../services/toastService";
 
 
 /* ===========================================================
@@ -70,7 +67,9 @@ function MyTrips() {
   const handleDelete = (id) => {
     deleteTrip(id);
     setTrips(getSavedTrips());
-  };
+
+    showSuccess("Trip deleted successfully.");
+};
 
   /* ===========================================================
      Filter Trips

@@ -22,6 +22,7 @@ import {
 
 import { saveTrip } from "../services/storage";
 import { exportTripPDF } from "../services/pdfGenerator";
+import { showSuccess } from "../services/toastService";
 
 /* ===========================================================
    Component : TripResult
@@ -55,12 +56,16 @@ function TripResult() {
 
   const handleSaveTrip = () => {
     saveTrip(tripPlan);
-    alert("Trip saved successfully!");
+    showSuccess(
+      `${tripPlan.destination} trip saved successfully!`
+    );
   };
 
   const handleExportPDF = () => {
-    exportTripPDF(tripPlan);
-  };
+  exportTripPDF(tripPlan);
+
+  showSuccess("Trip PDF exported successfully. 📄");
+};
 
   /* ===========================================================
      Render

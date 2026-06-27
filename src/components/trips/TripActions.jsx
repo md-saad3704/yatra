@@ -11,6 +11,7 @@
 =========================================================== */
 
 import { BookmarkPlus, Download } from "lucide-react";
+import { Button } from "../ui";
 
 /* ===========================================================
    Component : TripActions
@@ -23,21 +24,20 @@ function TripActions({
   return (
     <section className="mb-8 flex justify-center gap-4">
 
-      <button
+      <Button
+        icon={<BookmarkPlus size={18} />}
         onClick={onSave}
-        className="flex items-center gap-2 rounded-xl bg-[#FF6B35] px-6 py-3 font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-[#e85d2c]"
       >
-        <BookmarkPlus size={18} />
         Save Trip
-      </button>
+      </Button>
 
-      <button
+      <Button
+        variant="outline"
+        icon={<Download size={18} />}
         onClick={onExport}
-        className="flex items-center gap-2 rounded-xl border border-[#FF6B35] bg-white px-6 py-3 font-medium text-[#FF6B35] transition-all duration-300 hover:bg-orange-50"
       >
-        <Download size={18} />
         Export PDF
-      </button>
+      </Button>
 
     </section>
   );

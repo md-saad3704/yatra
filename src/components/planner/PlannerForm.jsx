@@ -9,6 +9,7 @@ import { Button } from "../ui";
 import BudgetSlider from "./BudgetSlider";
 import PlannerCard from "./PlannerCard";
 import ReviewStep from "./ReviewStep";
+import { showSuccess } from "../../services/toastService";
 
 function PlannerForm({
     currentStep,
@@ -89,8 +90,11 @@ function PlannerForm({
                 tripData={tripData}
                 onPrevious={() => setCurrentStep(4)}
                 onGenerate={() => {
-                    const tripPlan =
-                        generateTripPlan(tripData);
+                    const tripPlan = generateTripPlan(tripData);
+
+                    showSuccess(
+                        `${tripPlan.destination} itinerary is ready!`
+                    );
 
                     navigate("/trip/result", {
                         state: {
