@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import StepIndicator from "../components/planner/StepIndicator";
 import PlannerForm from "../components/planner/PlannerForm";
-
+import { PageHeader } from "../components/ui";
 function TripPlanner() {
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -18,16 +18,10 @@ function TripPlanner() {
   return (
     <div className="min-h-screen bg-[#FAFAF8]">
       <div className="mx-auto max-w-7xl px-6 py-20">
-        <div className="mb-12 text-center">
-          <h1 className="font-display text-5xl font-bold text-[#1A1A2E]">
-            Plan Your Perfect Journey
-          </h1>
-
-          <p className="mt-4 text-lg text-gray-600">
-            Answer a few questions and let
-            YĀTRĀ build your trip.
-          </p>
-        </div>
+        <PageHeader
+          title="Plan Your Perfect Journey"
+          subtitle="Answer a few questions and let YĀTRĀ build your trip."
+        />
 
         <StepIndicator currentStep={currentStep} />
 

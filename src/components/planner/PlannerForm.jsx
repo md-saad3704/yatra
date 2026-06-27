@@ -4,7 +4,11 @@ import InterestSelector from "./InterestSelector";
 import { useNavigate } from "react-router-dom";
 import { generateTripPlan } from "../../services/plannerEngine";
 
+import StepNavigation from "./StepNavigation";
+import { Button } from "../ui";
 import BudgetSlider from "./BudgetSlider";
+import PlannerCard from "./PlannerCard";
+import ReviewStep from "./ReviewStep";
 
 function PlannerForm({
     currentStep,
@@ -16,43 +20,31 @@ function PlannerForm({
 
     if (currentStep === 2) {
         return (
-            <div className="rounded-3xl bg-white p-10 shadow-lg">
-                <h2 className="mb-4 text-3xl font-bold text-[#1A1A2E]">
-                    What's your trip budget?
-                </h2>
-
-                <p className="mb-8 text-gray-600">
-                    Choose a budget range for your trip.
-                </p>
+            <PlannerCard
+                title="What's your trip budget?"
+                subtitle="Choose a budget range for your trip."
+            >
 
                 <BudgetSlider
                     tripData={tripData}
                     setTripData={setTripData}
                 />
 
-                <div className="flex justify-between">
-                    <button
-                        onClick={() => setCurrentStep(1)}
-                        className="rounded-xl border border-gray-300 px-8 py-3"
-                    >
-                        Previous
-                    </button>
+                <StepNavigation
+                    onPrevious={() => setCurrentStep(1)}
+                    onNext={() => setCurrentStep(3)}
+                />
 
-                    <button
-                        onClick={() => setCurrentStep(3)}
-                        className="rounded-xl bg-[#FF6B35] px-8 py-3 text-white"
-                    >
-                        Next
-                    </button>
-                </div>
-            </div>
+            </PlannerCard>
         );
     }
 
 
     if (currentStep === 3) {
         return (
-            <div className="rounded-3xl bg-white p-10 shadow-lg">
+            <PlannerCard
+                title="Tell us about your trip"
+            >
                 <h2 className="mb-4 text-3xl font-bold text-[#1A1A2E]">
                     Tell us about your trip
                 </h2>
@@ -62,168 +54,58 @@ function PlannerForm({
                     setTripData={setTripData}
                 />
 
-                <div className="mt-10 flex justify-between">
-                    <button
-                        onClick={() => setCurrentStep(2)}
-                        className="rounded-xl border border-gray-300 px-8 py-3"
-                    >
-                        Previous
-                    </button>
-
-                    <button
-                        onClick={() => setCurrentStep(4)}
-                        className="rounded-xl bg-[#FF6B35] px-8 py-3 text-white"
-                    >
-                        Next
-                    </button>
-                </div>
-            </div>
+                <StepNavigation
+                    onPrevious={() => setCurrentStep(2)}
+                    onNext={() => setCurrentStep(4)}
+                />
+            </PlannerCard>
         );
     }
 
     if (currentStep === 4) {
         return (
-            <div className="rounded-3xl bg-white p-10 shadow-lg">
-                <h2 className="mb-4 text-3xl font-bold text-[#1A1A2E]">
-                    What interests you?
-                </h2>
-
-                <p className="mb-8 text-gray-600">
-                    Select all that apply.
-                </p>
+            <PlannerCard
+                title="What interests you?"
+                subtitle="Select all that apply."
+            >
 
                 <InterestSelector
                     tripData={tripData}
                     setTripData={setTripData}
                 />
 
-                <div className="mt-10 flex justify-between">
-                    <button
-                        onClick={() => setCurrentStep(3)}
-                        className="rounded-xl border border-gray-300 px-8 py-3"
-                    >
-                        Previous
-                    </button>
-
-                    <button
-                        onClick={() => setCurrentStep(5)}
-                        className="rounded-xl bg-[#FF6B35] px-8 py-3 text-white"
-                    >
-                        Review
-                    </button>
-                </div>
-            </div>
+                <StepNavigation
+                    onPrevious={() => setCurrentStep(3)}
+                    onNext={() => setCurrentStep(5)}
+                    nextLabel="Review"
+                />
+            </PlannerCard>
         );
     }
 
     if (currentStep === 5) {
         return (
-            <div className="rounded-3xl bg-white p-10 shadow-lg">
-                <h2 className="mb-8 text-3xl font-bold text-[#1A1A2E]">
-                    Review Your Trip
-                </h2>
+            <ReviewStep
+                tripData={tripData}
+                onPrevious={() => setCurrentStep(4)}
+                onGenerate={() => {
+                    const tripPlan =
+                        generateTripPlan(tripData);
 
-                <div className="space-y-5">
-                    <div className="flex justify-between border-b pb-3">
-                        <span className="font-medium">
-                            Destination
-                        </span>
-                        <span>{tripData.destination}</span>
-                    </div>
-
-                    <div className="flex justify-between border-b pb-3">
-                        <span className="font-medium">
-                            Budget
-                        </span>
-                        <span>
-                            ₹{tripData.budget.toLocaleString()}
-                        </span>
-                    </div>
-
-                    <div className="flex justify-between border-b pb-3">
-                        <span className="font-medium">
-                            Duration
-                        </span>
-                        <span>
-                            {tripData.days} Days
-                        </span>
-                    </div>
-
-                    <div className="flex justify-between border-b pb-3">
-                        <span className="font-medium">
-                            Travelers
-                        </span>
-                        <span>
-                            {tripData.travelers}
-                        </span>
-                    </div>
-
-                    <div className="flex justify-between border-b pb-3">
-                        <span className="font-medium">
-                            Travel Style
-                        </span>
-                        <span>
-                            {tripData.travelStyle}
-                        </span>
-                    </div>
-
-                    <div>
-                        <p className="mb-3 font-medium">
-                            Interests
-                        </p>
-
-                        <div className="flex flex-wrap gap-3">
-                            {tripData.interests.map(
-                                (interest) => (
-                                    <span
-                                        key={interest}
-                                        className="rounded-full bg-orange-100 px-4 py-2 text-sm text-[#FF6B35]"
-                                    >
-                                        {interest}
-                                    </span>
-                                )
-                            )}
-                        </div>
-                    </div>
-                </div>
-
-                <div className="mt-10 flex justify-between">
-                    <button
-                        onClick={() => setCurrentStep(4)}
-                        className="rounded-xl border border-gray-300 px-8 py-3"
-                    >
-                        Previous
-                    </button>
-
-                    <button
-                        onClick={() => {
-                            const tripPlan = generateTripPlan(tripData);
-
-                            console.log("Generated Trip:", tripPlan);
-
-                            navigate("/trip/result", {
-                                state: {
-                                    tripPlan,
-                                },
-                            });
-                        }}
-                        className="rounded-xl bg-[#FF6B35] px-8 py-3 font-medium text-white"
-                    >
-                        Generate Trip
-                    </button>
-                </div>
-            </div>
+                    navigate("/trip/result", {
+                        state: {
+                            tripPlan,
+                        },
+                    });
+                }}
+            />
         );
     }
     return (
-        <div className="rounded-3xl bg-white p-10 shadow-lg">
-            <h2 className="mb-2 text-3xl font-bold text-[#1A1A2E]">
-                Where do you want to go?
-            </h2>
-
-            <p className="mb-8 text-gray-600">
-                Choose a destination to begin planning.
-            </p>
+        <PlannerCard
+            title="Where do you want to go?"
+            subtitle="Choose a destination to begin planning."
+        >
 
             <input
                 type="text"
@@ -265,15 +147,14 @@ function PlannerForm({
             </div>
 
             <div className="mt-10 flex justify-end">
-                <button
+                <Button
                     disabled={!tripData.destination}
                     onClick={() => setCurrentStep(2)}
-                    className="rounded-xl bg-[#FF6B35] px-8 py-3 font-medium text-white disabled:cursor-not-allowed disabled:opacity-50"
                 >
                     Next
-                </button>
+                </Button>
             </div>
-        </div>
+        </PlannerCard>
     );
 }
 
