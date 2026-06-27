@@ -3,6 +3,7 @@ import SearchPlanner from "./SearchPlanner";
 import { ArrowRight, MapPinned } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Button } from "../ui";
 
 import tajMahal from "../../assets/images/taj-mahal.png";
 import kerala from "../../assets/images/kerala.png";
@@ -10,8 +11,9 @@ import ladakh from "../../assets/images/ladakh.png";
 import goa from "../../assets/images/goa.png";
 import rajasthan from "../../assets/images/rajasthan.png";
 
-
+import { useNavigate } from "react-router-dom";
 function HeroSection() {
+    const navigate = useNavigate();
     const heroImages = [
         tajMahal,
         kerala,
@@ -31,7 +33,7 @@ function HeroSection() {
 
         return () => clearInterval(interval);
     }, [heroImages.length]);
-    
+
     return (
         <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
             {/* Background Gradient */}
@@ -63,43 +65,108 @@ function HeroSection() {
                     </span>
                 </motion.div>
                 {/* Heading */}
-                <h1
+                <motion.h1
+                    initial={{
+                        opacity: 0,
+                        y: 40,
+                    }}
+                    animate={{
+                        opacity: 1,
+                        y: 0,
+                    }}
+                    transition={{
+                        duration: 0.7,
+                        delay: 0.2,
+                    }}
                     className="font-display mb-6 text-5xl font-bold leading-tight text-white md:text-7xl"
                 >
                     Your Next Adventure
                     <br />
                     Starts Here
-                </h1>
+                </motion.h1>
 
                 {/* Subtitle */}
-                <p className="font-body mb-10 max-w-2xl text-lg text-white/90 md:text-xl">
+                <motion.p
+                    initial={{
+                        opacity: 0,
+                        y: 40,
+                    }}
+                    animate={{
+                        opacity: 1,
+                        y: 0,
+                    }}
+                    transition={{
+                        duration: 0.7,
+                        delay: 0.4,
+                    }} className="font-body mb-10 max-w-2xl text-lg text-white/90 md:text-xl">
                     Plan perfect trips across India and the world —
                     personalized to your budget, interests, and travel style.
-                </p>
+                </motion.p>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col gap-4 sm:flex-row">
-                    <button className="rounded-xl bg-[#FF6B35] px-8 py-4 font-medium text-white transition hover:scale-105 hover:shadow-lg">
+                <motion.div
+                    initial={{
+                        opacity: 0,
+                        y: 40,
+                    }}
+                    animate={{
+                        opacity: 1,
+                        y: 0,
+                    }}
+                    transition={{
+                        duration: 0.7,
+                        delay: 0.6,
+                    }}
+                    className="flex flex-col gap-4 sm:flex-row"
+                >
+                    <Button onClick={() => navigate("/plan")}>
                         Plan My Trip
-                    </button>
+                    </Button>
 
-                    <button className="flex items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-8 py-4 font-medium transition hover:bg-gray-50">
+                    <Button
+                        variant="secondary"
+                        onClick={() => navigate("/destinations")} 
+                        className="bg-white px-8"
+                    >
                         Explore Destinations
                         <ArrowRight size={18} />
-                    </button>
-                </div>
+                    </Button>
+                </motion.div>
 
 
                 {/* Search Container Placeholder */}
-                <SearchPlanner />
-                
+                <motion.div
+                    initial={{
+                        opacity: 0,
+                        y: 50,
+                    }}
+                    animate={{
+                        opacity: 1,
+                        y: 0,
+                    }}
+                    transition={{
+                        duration: 0.7,
+                        delay: 0.8,
+                    }}
+                >
+                    <SearchPlanner />
+                </motion.div>
+
             </div>
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white">
-                <div className="animate-bounce text-sm tracking-widest">
+                <motion.div
+                    animate={{
+                        y: [0, 10, 0],
+                    }}
+                    transition={{
+                        repeat: Infinity,
+                        duration: 1.5,
+                    }}
+                >
                     SCROLL
-                </div>
+                </motion.div>
             </div>
-        </section>
+        </section >
     );
 
 }
