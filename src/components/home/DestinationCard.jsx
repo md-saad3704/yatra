@@ -1,8 +1,10 @@
 import { ArrowRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import WishlistButton from "../ui/WishlistButton";
 
 function DestinationCard({
+  id,
   slug,
   name,
   image,
@@ -43,52 +45,28 @@ hover:shadow-[0_30px_60px_rgba(0,0,0,0.18)]"
         {/* Dark Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-        {/* Rating Badge */}
-        <div className="
-absolute
-right-4
-top-4
-flex
-items-center
-gap-1
-rounded-full
-bg-white
-px-3
-py-1
-text-sm
-font-medium
-shadow-md
-transition-all
-duration-300
-group-hover:scale-110
-">
-          <Star
-            size={14}
-            className="fill-yellow-400 text-yellow-400"
-          />
-          {rating}
+        {/* Wishlist + Rating */}
+        <div className="absolute top-4 right-4 flex items-center gap-2">
+
+          <div className="rounded-full bg-black/40 p-2 backdrop-blur-md">
+            <WishlistButton id={id} />
+          </div>
+
+          <div className="flex items-center gap-1 rounded-full bg-white px-3 py-1 text-sm font-medium shadow-md">
+            <Star
+              size={14}
+              className="fill-yellow-400 text-yellow-400"
+            />
+            <span>{rating}</span>
+          </div>
+
         </div>
 
         {/* Category Badge */}
-        <div className="
-absolute
-right-4
-top-4
-flex
-items-center
-gap-1
-rounded-full
-bg-white
-px-3
-py-1
-text-sm
-font-medium
-shadow-md
-transition-all
-duration-300
-group-hover:scale-110
-">
-          {category}
+        <div className="absolute left-4 top-4">
+          <span className="rounded-full bg-white px-3 py-1 text-xs font-medium text-black shadow-md">
+            {category}
+          </span>
         </div>
 
         {/* Destination Name */}
@@ -123,7 +101,7 @@ group-hover:scale-110
           <ArrowRight size={18} />
         </button>
       </div>
-    </motion.div>
+    </motion.div >
   );
 }
 
