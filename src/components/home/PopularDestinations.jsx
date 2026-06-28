@@ -1,8 +1,14 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  LayoutGroup,
+} from "framer-motion";
 
 import DestinationCard from "./DestinationCard";
 import { featuredDestinations } from "../../data/featuredDestinations";
+
+import { staggerContainer } from "../../utils/animations";
 
 function PopularDestinations() {
   const [activeTab, setActiveTab] = useState("India");
@@ -42,47 +48,106 @@ function PopularDestinations() {
 
         {/* Tabs */}
         <div className="mb-14 flex justify-center">
-          <div className="flex rounded-full border border-white/50 bg-white/80 p-2 shadow-xl backdrop-blur-md">
+          <LayoutGroup>
+            <div className="flex rounded-full border border-white/50 bg-white/80 p-2 shadow-xl backdrop-blur-md">
 
-            {/* {activeTab === "India" && (
+              {/* {activeTab === "India" && (
               
             )} */}
-            <button
-              onClick={() => setActiveTab("India")}
-              className={`rounded-full px-8 py-3 font-medium transition-colors duration-100 ${activeTab === "India"
-                ? "bg-[#FF6B35] text-white"
-                : "text-gray-600 hover:bg-orange-50"
-                }`}
-            >
-              India
-            </button>
+              <button
+                onClick={() => setActiveTab("India")}
+                className="relative rounded-full px-8 py-3 font-medium"
+              >
+                {activeTab === "India" && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 rounded-full bg-[#FF6B35]"
+                    transition={{
+                      type: "spring",
+                      stiffness: 350,
+                      damping: 30,
+                    }}
+                  />
+                )}
 
-            {/* {activeTab === "International" && (
+                <span
+                  className={`relative z-10 transition-colors ${activeTab === "India"
+                    ? "text-white"
+                    : "text-gray-600"
+                    }`}
+                >
+                  India
+                </span>
+              </button>
+
+              {/* {activeTab === "International" && (
              
             )} */}
-            <button
-              onClick={() => setActiveTab("International")}
-              className={`rounded-full px-8 py-3 font-medium transition-colors duration-100 ${activeTab === "International"
-                  ? "bg-[#FF6B35] text-white"
-                  : "text-gray-600 hover:bg-orange-50"
-                }`}
-            >
-              International
-            </button>
-          </div>
+              <button
+                onClick={() => setActiveTab("International")}
+                className="relative rounded-full px-8 py-3 font-medium"
+              >
+                {activeTab === "International" && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 rounded-full bg-[#FF6B35]"
+                    transition={{
+                      type: "spring",
+                      stiffness: 350,
+                      damping: 30,
+                    }}
+                  />
+                )}
+
+                <span
+                  className={`relative z-10 transition-colors ${activeTab === "International"
+                    ? "text-white"
+                    : "text-gray-600"
+                    }`}
+                >
+                  International
+                </span>
+              </button>
+            </div>
+          </LayoutGroup>
         </div>
 
         {/* Destination Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {filteredDestinations.map((destination) => (
-            <DestinationCard
-              key={destination.id}
-              {...destination}
-            />
-          ))}
-        </div>
+        <AnimatePresence mode="wait">
+
+          <motion.div
+            key={activeTab}
+            initial={{
+              opacity: 0,
+              y: 20,
+            }}
+
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+
+            exit={{
+              opacity: 0,
+              y: -20,
+            }}
+            transition={{
+              duration: 0.45,
+              ease: "easeInOut",
+            }}
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+          >
+            {filteredDestinations.map((destination) => (
+              <DestinationCard
+                key={destination.id}
+                {...destination}
+              />
+            ))}
+          </motion.div>
+
+        </AnimatePresence>
       </div>
-    </section>
+    </section >
 
 
   );

@@ -10,25 +10,54 @@ function DestinationCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
-      className="group overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
+      initial={{
+        opacity: 0,
+        y: 50,
+        scale: 0.95,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+      }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{
+        duration: 0.6,
+        ease: "easeOut",
+      }}
+      className="group overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-500 hover:-translate-y-4
+hover:shadow-[0_30px_60px_rgba(0,0,0,0.18)]"
     >
       {/* Image Container */}
       <div className="relative h-72 overflow-hidden">
         <img
           src={image}
           alt={name}
-          className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+          className="h-full w-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
         />
 
         {/* Dark Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
         {/* Rating Badge */}
-        <div className="absolute right-4 top-4 flex items-center gap-1 rounded-full bg-white px-3 py-1 text-sm font-medium shadow-md">
+        <div className="
+absolute
+right-4
+top-4
+flex
+items-center
+gap-1
+rounded-full
+bg-white
+px-3
+py-1
+text-sm
+font-medium
+shadow-md
+transition-all
+duration-300
+group-hover:scale-110
+">
           <Star
             size={14}
             className="fill-yellow-400 text-yellow-400"
@@ -37,7 +66,24 @@ function DestinationCard({
         </div>
 
         {/* Category Badge */}
-        <div className="absolute left-4 top-4 rounded-full bg-[#FF6B35] px-3 py-1 text-xs font-medium text-white">
+        <div className="
+absolute
+right-4
+top-4
+flex
+items-center
+gap-1
+rounded-full
+bg-white
+px-3
+py-1
+text-sm
+font-medium
+shadow-md
+transition-all
+duration-300
+group-hover:scale-110
+">
           {category}
         </div>
 
@@ -63,7 +109,17 @@ function DestinationCard({
           </div>
         </div>
 
-        <button className="flex items-center gap-2 font-medium text-[#FF6B35] transition group-hover:gap-3">
+        <button className="
+flex
+items-center
+gap-2
+font-medium
+text-[#FF6B35]
+transition-all
+duration-300
+group-hover:gap-4
+group-hover:translate-x-1
+">
           Explore Destination
           <ArrowRight size={18} />
         </button>
