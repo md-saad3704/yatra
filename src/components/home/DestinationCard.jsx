@@ -1,14 +1,18 @@
 import { ArrowRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function DestinationCard({
+  slug,
   name,
   image,
   category,
   price,
   rating,
 }) {
+  const navigate = useNavigate();
   return (
+
     <motion.div
       initial={{
         opacity: 0,
@@ -109,17 +113,12 @@ group-hover:scale-110
           </div>
         </div>
 
-        <button className="
-flex
-items-center
-gap-2
-font-medium
-text-[#FF6B35]
-transition-all
-duration-300
-group-hover:gap-4
-group-hover:translate-x-1
-">
+        <button
+          onClick={() =>
+            navigate(`/destinations/${slug}`)
+          }
+          className="flex items-center gap-2 font-medium text-[#FF6B35] transition-all duration-300 group-hover:translate-x-1 group-hover:gap-4"
+        >
           Explore Destination
           <ArrowRight size={18} />
         </button>
