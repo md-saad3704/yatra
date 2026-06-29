@@ -3,6 +3,9 @@ export const featuredDestinations = [
     id: 1,
     slug: "manali",
     name: "Manali",
+    city: "Manali",
+    latitude: 32.2396,
+    longitude: 77.1887,
     country: "India",
     image:
       "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23",
@@ -57,6 +60,9 @@ export const featuredDestinations = [
     id: 2,
     slug: "goa",
     name: "Goa",
+    city: "Goa",
+    latitude: 15.4909,
+    longitude: 73.8278,
     country: "India",
     image:
       "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2",
@@ -111,6 +117,9 @@ export const featuredDestinations = [
     id: 3,
     slug: "jaipur",
     name: "Jaipur",
+    city: "Jaipur",
+    latitude: 26.9124,
+    longitude: 75.7873,
     country: "India",
     image:
       "https://images.unsplash.com/photo-1477587458883-47145ed94245",
@@ -164,6 +173,9 @@ export const featuredDestinations = [
     id: 4,
     slug: "bangkok",
     name: "Bangkok",
+    city: "Bangkok",
+    latitude: 13.7563,
+    longitude: 100.5018,
     country: "International",
     image:
       "https://images.unsplash.com/photo-1508009603885-50cf7c579365",
@@ -218,6 +230,9 @@ export const featuredDestinations = [
     id: 5,
     slug: "dubai",
     name: "Dubai",
+    city: "Dubai",
+    latitude: 25.2048,
+    longitude: 55.2708,
     country: "International",
     image:
       "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
@@ -272,6 +287,9 @@ export const featuredDestinations = [
     id: 6,
     slug: "bali",
     name: "Bali",
+    city: "Bali",
+    latitude: -8.6705,
+    longitude: 115.2126,
     country: "International",
     image:
       "https://images.unsplash.com/photo-1537996194471-e657df975ab4",

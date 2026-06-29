@@ -19,6 +19,8 @@ import TravelTips from "../components/destinations/TravelTips";
 import PackingList from "../components/destinations/PackingList";
 import PlanTripCTA from "../components/destinations/PlanTripCTA";
 
+import useWeather from "../hooks/useWeather";
+
 function DestinationDetail() {
   const { slug } = useParams();
 
@@ -30,13 +32,27 @@ function DestinationDetail() {
     return <Navigate to="/destinations" replace />;
   }
 
+  const {
+    weather,
+    loading,
+    error,
+  } = useWeather(
+    destination.latitude,
+    destination.longitude
+  );
+
   return (
     <main className="bg-[#FAFAF8]">
       <DestinationHero destination={destination} />
 
       <DestinationOverview destination={destination} />
 
-      <WeatherCard weather={destination.weather} />
+      <WeatherCard
+        liveWeather={weather}
+        fallbackWeather={destination.weather}
+        loading={loading}
+        error={error}
+      />
 
       <AttractionsSection
         attractions={destination.attractions}
