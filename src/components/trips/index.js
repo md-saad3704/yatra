@@ -19,3 +19,5 @@ export { default as EmptyTrips } from "./EmptyTrips";
 
 export { default as TripFilters } from "./TripFilters";
 export { default as FilterSummary } from "./FilterSummary";
+
+export { default as WishlistSection } from "./WishlistSection";

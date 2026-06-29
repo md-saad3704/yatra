@@ -24,6 +24,7 @@ import {
   EmptyTrips,
   TripFilters,
   FilterSummary,
+  WishlistSection,
 } from "../components/trips";
 
 
@@ -69,7 +70,7 @@ function MyTrips() {
     setTrips(getSavedTrips());
 
     showSuccess("Trip deleted successfully.");
-};
+  };
 
   /* ===========================================================
      Filter Trips
@@ -124,6 +125,8 @@ function MyTrips() {
       <div className="mx-auto max-w-7xl px-6 py-20">
 
         <MyTripsHeader />
+
+        <WishlistSection />
 
         {/* ===========================================================
             Filters
