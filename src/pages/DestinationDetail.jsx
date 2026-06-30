@@ -20,6 +20,7 @@ import PackingList from "../components/destinations/PackingList";
 import PlanTripCTA from "../components/destinations/PlanTripCTA";
 
 import useWeather from "../hooks/useWeather";
+import DestinationMap from "../components/maps/DestinationMap";
 
 function DestinationDetail() {
   const { slug } = useParams();
@@ -56,6 +57,10 @@ function DestinationDetail() {
 
       <AttractionsSection
         attractions={destination.attractions}
+      />
+
+      <DestinationMap
+        destination={destination}
       />
 
       <FoodSection
